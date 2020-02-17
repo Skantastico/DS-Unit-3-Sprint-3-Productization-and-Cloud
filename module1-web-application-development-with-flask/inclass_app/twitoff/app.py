@@ -1,11 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def index():
+    # return "Hello World!"
+    return render_template("homepage.html")
 
 
 @app.route("/about")
@@ -24,7 +25,7 @@ def users():
     return jsonify(users)
 
 
-@app.route("users/create", methods=["POST"])
+@app.route("/users/create", methods=["POST"])
 def create_user():
     print("CREATING A NEW USER...")
     print("FORM DATA:", dict(request.form))
