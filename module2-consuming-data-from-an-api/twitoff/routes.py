@@ -1,9 +1,11 @@
 from flask import Blueprint, jsonify, request, render_template #current_app
 
 from twitoff.models import User, Tweet, db
+from twitoff.twitter_service import twitter_api_client
 
 my_routes = Blueprint("routes", __name__)
 
+client = twitter_api_client()
 
 #
 # ROUTING
@@ -84,6 +86,21 @@ def hello(name=None):
 @my_routes.route("/get_tweets")
 def get_tweets():
     tweets = []
-    # todo: actually get the tweets
+    # client = twitter_api_client()
+    statuses = client.user_timeline("elonmusk", tweet_mode="extended")
+    for status in statuses:
+        tweets.append({"id": status.id_str, "message": status.full_text})
     print(tweets)
-    return jsonify({"message": "OK"})
+    return jsonify(tweets)
+
+@my_routes.route("/get_twitter_user")
+def get_twitter_user():
+    tweets = []
+    # client = twitter_api_client()
+    statuses = client.user_timeline("elonmusk", tweet_mode="extended")
+    for status in statuses:
+        tweets.append({"id": status.id_str, "message": status.full_text})
+    print(tweets)
+    return jsonify(tweets)
+
+    # bootstrap react native
