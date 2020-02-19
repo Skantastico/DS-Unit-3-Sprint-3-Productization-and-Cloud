@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, render_template #current_app
+from flask import Blueprint, jsonify, request, render_template, current_app
 
 from twitoff.models import User, Tweet, db
 from twitoff.twitter_service import twitter_api_client
@@ -86,6 +86,7 @@ def hello(name=None):
 @my_routes.route("/get_tweets")
 def get_tweets():
     tweets = []
+    client = current_app.config["TWITTER_API_CLIENT"]
     # client = twitter_api_client()
     statuses = client.user_timeline("elonmusk", tweet_mode="extended")
     for status in statuses:
@@ -96,6 +97,7 @@ def get_tweets():
 @my_routes.route("/get_twitter_user")
 def get_twitter_user():
     tweets = []
+    client = current_app.config["TWITTER_API_CLIENT"]
     # client = twitter_api_client()
     statuses = client.user_timeline("elonmusk", tweet_mode="extended")
     for status in statuses:
