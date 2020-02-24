@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>OpenAQ Results</title>
+    </head>
+    <body>
+        <p> Date and time of risky values of PM in Los Angeles (greater than 10PPM) </p>
+
+        {% for risky_val in risky_values %}
+        <p>{{risky_val}}</p>
+
+        {% endfor %}
+
+    </body>
+</html>
